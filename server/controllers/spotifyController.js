@@ -57,19 +57,14 @@ export const searchTracks = async (req, res) => {
     }
 
     const json = await resp.json();
-
-    const tracks = (json.tracks?.items || [])
-      .map(t => ({
-        id: t.id,
-        uri: t.uri, // 👈 útil si luego quieres reproducción completa
-        name: t.name,
-        artists: t.artists?.map(a => a.name) || [],
-        album: t.album?.name || '',
-        preview_url: t.preview_url || '',
-        image: t.album?.images?.[1]?.url || t.album?.images?.[0]?.url || '',
-        external_url: t.external_urls?.spotify || ''
-      }))
-      .filter(t => t.preview_url); // 👈 SOLO con preview
+    const tracks = (json.tracks?.items || []).map(t => ({
+      id: t.id,
+      name: t.name,
+      artists: t.artists?.map(a => a.name) || [],
+      album: t.album?.name || '',
+      preview_url: t.preview_url || '',
+      image: t.album?.images?.[1]?.url || t.album?.images?.[0]?.url || ''
+    }));
 
     res.json({ query: q, results: tracks });
   } catch (err) {
