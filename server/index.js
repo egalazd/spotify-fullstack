@@ -11,7 +11,7 @@ app.use(express.json())
 app.use('/api/spotify', spotifyRouter)
 app.get('/api/health', (_req, res) => res.json({ ok: true }))
 
-// Exporta handler para Vercel
+// Handler para Vercel
 export default function handler(req, res) {
   return app(req, res)
 }
