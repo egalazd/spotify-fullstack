@@ -14,7 +14,6 @@ app.get('/api/health', (_req, res) => res.json({ ok: true }))
 
 export default serverless(app)
 
-// Solo en local
 if (!process.env.VERCEL) {
   const port = process.env.PORT || 3000
   app.listen(port, () => console.log(`API on http://localhost:${port}`))
